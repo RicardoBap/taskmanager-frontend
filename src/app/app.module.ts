@@ -14,8 +14,9 @@ import { TaskService } from './tasks/shared/task.service';
 
 const ROUTES = RouterModule.forRoot([
   { path: 'tasks', component: TasksComponent },
+  { path: 'tasks/:id', component: TaskDetailComponent },
   { path: 'dashboard', component: DashboardComponent },
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' }
+  { path: '', redirectTo: '/dashboard', pathMatch: 'full' }  
 ])
 
 @NgModule({
