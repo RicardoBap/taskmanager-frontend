@@ -10,11 +10,10 @@
       <td>{{ task.title }}</td>
       <td>
         <!-- Button trigger modal -->
-        <button class="btn btn-primary" data-toggle="modal" data-target="#taskDetailModal" 
-          (click)="onSelect(task)" >
+        <a class="btn btn-primary" [routerLink]="['/tasks', task.id]" >
           <span class="glyphicon  glyphicon-info-sign"></span>
           Detalhes
-        </button>
+        </a>
         <button type="button" class="btn btn-danger">
           <span class="glyphicon  glyphicon-trash"></span> 
           Excluir        
