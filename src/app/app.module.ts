@@ -4,13 +4,17 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
+// Ordem alfabética
 import { AppComponent } from './app.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { TaskDetailComponent } from './tasks/task-detail/task-detail.component';
 
 const ROUTES = RouterModule.forRoot([
-  { path: 'tasks', component: TasksComponent }
+  { path: 'tasks', component: TasksComponent },
+  { path: 'dashboard', component: DashboardComponent },
+  { path: '', redirectTo: '/dashboard', pathMatch: 'full' }
 ])
 
 @NgModule({
@@ -18,7 +22,8 @@ const ROUTES = RouterModule.forRoot([
     AppComponent,
     NavbarComponent,
     TasksComponent,
-    TaskDetailComponent
+    TaskDetailComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
