@@ -1,8 +1,12 @@
+<h1 class="page-header">List of Tasks</h1>
+
 <table class="table">
   <thead>
-    <th>ID</th>
-    <th>Título</th>
-    <th>Ações</th>
+    <tr>
+      <th>ID</th>
+      <th>Título</th>
+      <th>Ações</th>
+    </tr>
   </thead>
   <tbody>
     <tr *ngFor="let task of tasks">
@@ -10,7 +14,7 @@
       <td>{{ task.title }}</td>
       <td>
         <!-- Button trigger modal -->
-        <a class="btn btn-primary" [routerLink]="['/tasks', task.id]" >
+        <a class="btn btn-info" [routerLink]="['/tasks', task.id]" >
           <span class="glyphicon  glyphicon-info-sign"></span>
           Detalhes
         </a>
