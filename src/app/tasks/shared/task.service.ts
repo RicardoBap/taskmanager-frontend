@@ -16,8 +16,16 @@ const TASKS: Array<Task> = [
 
 export class TaskService {
 
-  public getTasks(): Array<Task> {
-    return TASKS
+  public getTasks(): Promise<Task[]> {
+    let promise = new Promise((resolve, reject) => {
+      if (TASKS.length > 0) {
+       resolve(TASKS)
+      } else {
+        let error_msg = "NÃO HÁ TAREFAS"
+        reject(error_msg)
+      }            
+    })
+    return promise
   }
 
 }

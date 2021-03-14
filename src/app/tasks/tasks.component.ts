@@ -12,14 +12,17 @@ export class TasksComponent implements OnInit {
 
   public tasks: Array<Task>
   public selectedTask: Task
-  //private taskService: TaskService
 
-  public constructor(private taskService: TaskService) {
-    //this.taskService = taskService
-  }
+  public constructor(private taskService: TaskService) { }
 
   public ngOnInit() {
-    this.tasks = this.taskService.getTasks()
+    this.taskService.getTasks()
+      .then((_tasks) => 
+        this.tasks = _tasks
+      )
+      .catch((error_msg) => 
+        alert(error_msg)
+      )
    }
 
   public onSelect(task: Task): void {
