@@ -28,4 +28,8 @@ export class TaskService {
     return promise
   }
 
+  public getImportantTasks(): Promise<Array<Task>> {
+    return Promise.resolve(TASKS.slice(0, 3))
+  }
+
 }
