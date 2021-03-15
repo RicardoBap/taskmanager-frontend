@@ -1,5 +1,17 @@
 <h1 class="page-header">List of Tasks</h1>
 
+<div class="well">
+  <div class="row">
+    <div class="col-md-10">
+      <input type="text" class="form-control" placeholder="Digite aqui uma nova tarefa" 
+        [(ngModel)]="newTask.title" >
+    </div>
+    <div class="col-md-2">
+      <button class="btn btn-success" (click)="createTask()" >Adicionar tarefa</button>
+    </div>
+  </div>
+</div>
+
 <table class="table">
   <thead>
     <tr>
