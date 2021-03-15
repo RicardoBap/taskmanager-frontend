@@ -30,8 +30,9 @@ export class TaskService {
     
   }
 
-  public getImportantTasks(): Promise<Array<Task>> {
-    return Promise.resolve(TASKS.slice(0, 3))
+  public getImportantTasks(): Observable<Array<Task>> {
+    return this.getTasks()
+      .map((tasks) => tasks.slice(0, 4))
   }
 
   public getTask(id: number): Observable<Task> {
