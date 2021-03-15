@@ -32,4 +32,16 @@ export class TaskDetailComponent implements OnInit {
     this.location.back()
   }
 
+  public updateTask() {
+    if(!this.task.title) {
+      alert('A tarefa deve ter um título')
+    } else {
+      this.taskService.updateTask(this.task)
+        .subscribe(
+          () => alert('Tarefa atualizada com sucesso!'),
+          () => alert('Ocorreu um erro no servidor, tente novamente mais tarde')
+        )
+    }
+  }
+
 }

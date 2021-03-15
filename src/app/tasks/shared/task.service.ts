@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Http, Response } from '@angular/http'
+import { Http, Response, Headers } from '@angular/http'
 
 import { Observable } from "rxjs/Observable";
 import "rxjs/add/operator/map"
@@ -36,6 +36,17 @@ export class TaskService {
       .map((response: Response) => {
         return response.json().data as Task
       })
+  }
+
+  public updateTask(task: Task): Observable<Task> {
+    let url = `${this.tasksUrl}/${task.id}`
+    let body = JSON.stringify(task)
+    let headers = new Headers({'Content-Type': 'application/json'})
+
+    return this.http.put(url, body, { headers: headers })
+      .catch(this.handleErrors)
+      .map(() => task)
+
   }
 
   private handleErrors(error: Response) {
