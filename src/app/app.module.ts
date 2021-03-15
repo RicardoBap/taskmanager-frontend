@@ -13,6 +13,8 @@ import { TaskService } from './tasks/shared/task.service';
 
 // Módulos
 import { AppRoutingModule } from './app-routing.module';
+import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryTaskDataService } from './in-memory-task-data.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import { AppRoutingModule } from './app-routing.module';
     BrowserModule,
     FormsModule,
     HttpModule,
-    AppRoutingModule
+    AppRoutingModule,
+    InMemoryWebApiModule.forRoot(InMemoryTaskDataService)
   ],
   providers: [ TaskService ],
   bootstrap: [AppComponent]
