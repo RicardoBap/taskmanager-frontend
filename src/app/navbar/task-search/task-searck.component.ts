@@ -1,0 +1,16 @@
+import { Component } from "@angular/core";
+
+import { Task } from './../../tasks/shared/task.model';
+import { TaskService } from './../../tasks/shared/task.service';
+
+@Component({
+  selector: 'app-task-search',
+  templateUrl: './task-search.component.html'
+})
+export class TaskSearchComponent {
+
+  public task: Task
+
+  public constructor(private taskSerice: TaskService) {}
+
+}
