@@ -4,7 +4,7 @@ import { Location } from "@angular/common";
 
 import { Task } from './../shared/task.model'
 import { TaskService } from './../shared/task.service';
-import 'rxjs/add/operator/switchMap'
+
 
 @Component({
   selector: 'app-task-detail',

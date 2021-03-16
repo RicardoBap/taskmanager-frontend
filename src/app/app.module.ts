@@ -17,6 +17,19 @@ import { AppRoutingModule } from './app-routing.module';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryTaskDataService } from './in-memory-task-data.service';
 
+// rxjs operators -> utilizados no subscribe para obter retorno do Observable
+import "rxjs/add/operator/catch"
+import 'rxjs/add/operator/debounceTime'
+import 'rxjs/add/operator/distinctUntilChanged'
+import 'rxjs/add/operator/do'
+import "rxjs/add/operator/map"
+import 'rxjs/add/operator/switchMap'
+
+// rxjs extensions -> metodos adicionais para atribuir nas classes utilizadas
+import "rxjs/add/observable/throw"
+import 'rxjs/add/Observable/of'
+
+
 @NgModule({
   declarations: [
     AppComponent,
