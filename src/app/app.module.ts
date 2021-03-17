@@ -29,6 +29,10 @@ import 'rxjs/add/operator/switchMap'
 import "rxjs/add/observable/throw"
 import 'rxjs/add/Observable/of'
 
+//  jquery plugins
+import * as $ from 'jquery'
+import * as datetimepicker from 'eonasdan-bootstrap-datetimepicker'
+
 
 @NgModule({
   declarations: [

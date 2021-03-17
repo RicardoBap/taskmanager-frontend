@@ -1,16 +1,15 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, AfterViewInit } from "@angular/core";
 import { ActivatedRoute, Params } from "@angular/router";
 import { Location } from "@angular/common";
 
 import { Task } from './../shared/task.model'
 import { TaskService } from './../shared/task.service';
 
-
 @Component({
   selector: 'app-task-detail',
   templateUrl: './task-detail.component.html'
 })
-export class TaskDetailComponent implements OnInit {
+export class TaskDetailComponent implements OnInit, AfterViewInit {
 
   public task: Task
   public taskDoneOptions: Array<any> = [
@@ -24,6 +23,8 @@ export class TaskDetailComponent implements OnInit {
     private location: Location) {}
 
   public ngOnInit() {
+    this.task = new Task(null, null)
+
     this.route.params
       .switchMap( (params: Params) => this.taskService.getById(+params['id']) )
       .subscribe({
@@ -31,6 +32,13 @@ export class TaskDetailComponent implements OnInit {
         error: (error) => alert("Ocorreu um erro no servidor, tente novamente mais tarde")
       })     
   }
+
+  public ngAfterViewInit() {
+    $("#deadline").datetimepicker({
+      'sideBySide': true,
+      'locale': 'pt-BR'
+    }).on('dp.change', () => this.task.deadline = $("#deadline").val())
+  } 
 
   public goBack() {
     this.location.back()
