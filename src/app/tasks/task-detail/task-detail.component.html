@@ -1,6 +1,6 @@
 <h1 class="page-header">Tasks Details: {{ task.title }}</h1>
 
-<form #taskForm="ngForm" >
+<form #taskForm="ngForm" (ngSubmit)="updateTask()">
   <div class="row">
     <div class="form-group col-md-6 has-feedback" [class.has-error]="title.invalid && title.touched" [class.has-success]="title.valid" >
       <label for="title" class="control-label">Title</label>
@@ -39,10 +39,7 @@
     </div>      
   </div> 
   
+  <button type="submit" class="btn btn-success" [disabled]="!taskForm.valid">Update</button>
   <button class="btn btn-default" (click)="goBack()" >Back</button>
-  <button type="submit" class="btn btn-success" [disabled]="!taskForm.valid" (click)="updateTask()">Update</button>
-    
-  <pre>
-    {{ task | json }}
-  </pre>
+ 
 </form>
