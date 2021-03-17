@@ -1,6 +1,40 @@
 <h1 class="page-header">Tasks Details: {{ task.title }}</h1>
 
-<form #taskForm="ngForm" (ngSubmit)="updateTask()">
+<form [formGroup]="reactiveTaskForm">
+  <div class="row">
+    <div class="form-group col-md-6">
+      <label for="title" class="control-label">Title</label>
+      <input class="form-control" id="title" type="text" formControlName="title" >
+    </div>
+
+    <div class="form-group col-md-3">
+      <label for="deadline" class="control-label">Deadline</label>
+      <input class="form-control" id="deadline" type="text" formControlName="deadline" >
+    </div>
+
+    <div class="form-group col-md-3">
+      <label for="done" class="control-label">Title</label>
+      <select class="form-control" id="done" type="text" formControlName="done" >
+        <option *ngFor="let option of taskDoneOptions" [value]="option.value">{{ option.text }}</option>
+      </select>
+    </div>    
+  </div>
+
+  <div class="row">
+    <div class="form-group col-md-12">
+      <label for="description" class="control-label">Description</label>
+      <textarea class="form-control" id="description" type="text" rows="4" formControlName="description" >
+      </textarea>
+    </div>
+  </div>
+
+  <pre>
+    {{ reactiveTaskForm.value | json }}
+  </pre>
+</form>
+
+
+<!-- <form #taskForm="ngForm" (ngSubmit)="updateTask()">
   <div class="row">
     <div class="form-group col-md-6 has-feedback" [class.has-error]="title.invalid && title.touched" [class.has-success]="title.valid" >
       <label for="title" class="control-label">Title</label>
@@ -42,4 +76,4 @@
   <button type="submit" class="btn btn-success" [disabled]="!taskForm.valid">Update</button>
   <button class="btn btn-default" (click)="goBack()" >Back</button>
  
-</form>
+</form> -->
