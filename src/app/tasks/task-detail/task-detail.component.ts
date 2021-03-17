@@ -37,16 +37,42 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
     this.route.params
       .switchMap( (params: Params) => this.taskService.getById(+params['id']) )
       .subscribe({
-        next: (task) => this.task = task,
+        next: (task) => this.setTask(task),
         error: (error) => alert("Ocorreu um erro no servidor, tente novamente mais tarde")
       })     
+  }
+
+  public setTask(task: Task): void {
+    this.task = task
+
+    //seValue
+    // let formModel = {
+    //   title: task.title || null,
+    //   deadline: task.deadline || null,
+    //   done: task.done || null,
+    //   description: task.description || null
+    // }
+    // this.reactiveTaskForm.setValue(formModel)
+
+    // patchValue
+    // let formModel = {
+    //   title: task.title || null,
+    //   deadline: task.deadline || null,
+    //   done: task.done || null,
+    //   description: task.description || null
+    // }
+    // this.reactiveTaskForm.patchValue(formModel)
+
+    this.reactiveTaskForm.patchValue(task)
+
   }
 
   public ngAfterViewInit() {
     $("#deadline").datetimepicker({
       'sideBySide': true,
       'locale': 'pt-BR'
-    }).on('dp.change', () => this.task.deadline = $("#deadline").val())
+    // }).on('dp.change', () => this.reactiveTaskForm.get('deadline').setValue( $("#deadline").val()) )
+    }).on('dp.change', () => this.reactiveTaskForm.patchValue( { deadline: $("#deadline").val() } )) 
   } 
 
   public goBack() {
