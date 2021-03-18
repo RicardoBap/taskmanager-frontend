@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit } from "@angular/core";
 import { ActivatedRoute, Params } from "@angular/router";
-import { FormControl, FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Location } from "@angular/common";
 
 import { Task } from './../shared/task.model'
@@ -81,11 +81,20 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
   }
 
   public updateTask() {
+    this.task.title = this.reactiveTaskForm.get('title').value
+    this.task.deadline = this.reactiveTaskForm.get('deadline').value
+    this.task.done = this.reactiveTaskForm.get('done').value
+    this.task.description = this.reactiveTaskForm.get('description').value
+
     this.taskService.update(this.task)
     .subscribe(
       () => alert('Tarefa atualizada com sucesso!'),
       () => alert('Ocorreu um erro no servidor, tente novamente mais tarde')
     )
   }
+
+  // public showFieldError(field): boolean {
+  //   return field.invalid && ( field.touched || field.dirty )
+  // }
 
 }
