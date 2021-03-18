@@ -8,22 +8,26 @@ import { TaskService } from './../shared/task.service';
 
 @Component({
   selector: 'app-task-detail',
-  templateUrl: './task-detail.component.html'
+  templateUrl: './task-detail.component.html',
+  styles: [`.form-control-feedback { margin-right: 25px}`]
 })
 export class TaskDetailComponent implements OnInit, AfterViewInit {
 
   public reactiveTaskForm: FormGroup
   public task: Task
-  public taskDoneOptions: Array<any> = [
-    { value: false, text: "Pendente" },
-    { value: true, text: "Feita" }
-  ]
+  public taskDoneOptions: Array<any> 
 
   constructor(
     private taskService: TaskService,
     private route: ActivatedRoute,
     private location: Location,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder
+    ) {
+      this.taskDoneOptions = [
+        { value: false, text: "Pendente" },
+        { value: true, text: "Feita" }
+      ]
+
       this.reactiveTaskForm = this.formBuilder.group({
         title: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(255) ]],
         deadline: [null, Validators.required],
@@ -46,33 +50,13 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
   public setTask(task: Task): void {
     this.task = task
 
-    //seValue
-    // let formModel = {
-    //   title: task.title || null,
-    //   deadline: task.deadline || null,
-    //   done: task.done || null,
-    //   description: task.description || null
-    // }
-    // this.reactiveTaskForm.setValue(formModel)
-
-    // patchValue
-    // let formModel = {
-    //   title: task.title || null,
-    //   deadline: task.deadline || null,
-    //   done: task.done || null,
-    //   description: task.description || null
-    // }
-    // this.reactiveTaskForm.patchValue(formModel)
-
     this.reactiveTaskForm.patchValue(task)
-
   }
 
   public ngAfterViewInit() {
     $("#deadline").datetimepicker({
       'sideBySide': true,
       'locale': 'pt-BR'
-    // }).on('dp.change', () => this.reactiveTaskForm.get('deadline').setValue( $("#deadline").val()) )
     }).on('dp.change', () => this.reactiveTaskForm.patchValue( { deadline: $("#deadline").val() } )) 
   } 
 
@@ -93,8 +77,28 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
     )
   }
 
-  // public showFieldError(field): boolean {
-  //   return field.invalid && ( field.touched || field.dirty )
-  // }
+  // Forms errors methods
+  public fieldClassForErrorOrSuccess(fieldName: string) {
+    return {
+      "has-error": this.showFieldError(fieldName),
+      "has-success": this.getField(fieldName).valid
+    }
+  }
+
+  public iconClassForErrorOrSuccess(fieldName: string) {
+    return {
+      "glyphicon-remove": this.showFieldError(fieldName),
+      "glyphicon-ok": this.getField(fieldName).valid
+    }
+  }
+
+  public showFieldError(fieldName: string): boolean {
+    let field = this.getField(fieldName)
+    return field.invalid && ( field.touched || field.dirty )
+  }
+
+  public getField(fieldName: string) {
+    return this.reactiveTaskForm.get(fieldName)
+  }
 
 }
