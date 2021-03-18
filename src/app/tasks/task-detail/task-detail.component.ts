@@ -25,14 +25,10 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
     private location: Location,
     private formBuilder: FormBuilder) {
       this.reactiveTaskForm = this.formBuilder.group({
-        title: [null],
-        deadline: [null],
-        done: [null],
-        description: [null],
-        user: this.formBuilder.group({
-          name: ["Ricardo"],
-          email: ["ricardo@mail.com"]
-        })
+        title: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(255) ]],
+        deadline: [null, Validators.required],
+        done: [null, Validators.required],
+        description: [null]
       })
     }
 

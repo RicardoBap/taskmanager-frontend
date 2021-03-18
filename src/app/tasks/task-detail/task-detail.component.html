@@ -1,22 +1,39 @@
 <h1 class="page-header">Tasks Details: {{ task.title }}</h1>
 
 <form [formGroup]="reactiveTaskForm">
-  <div class="row">
-    <div class="form-group col-md-6">
+  <div class="row">                              
+    <div class="form-group col-md-6 has-feedback" [class.has-error]="reactiveTaskForm.get('title').invalid && reactiveTaskForm.get('title').touched" [class.has-success]="reactiveTaskForm.get('title').valid">      
       <label for="title" class="control-label">Title</label>
       <input class="form-control" id="title" type="text" formControlName="title" >
+      <span class="glyphicon form-control-feedback" [class.glyphicon-ok]="reactiveTaskForm.get('title').valid" [class.glyphicon-remove]="reactiveTaskForm.get('title').invalid && reactiveTaskForm.get('title').touched" style="margin-right: 20px;"></span>
+      
+      <div *ngIf="reactiveTaskForm.get('title').invalid && reactiveTaskForm.get('title').touched" class="text-danger" >
+        <div *ngIf="reactiveTaskForm.get('title').errors.required">Title is required</div>
+        <div *ngIf="reactiveTaskForm.get('title').errors.minlength">Deve ter no mínimo 3 caracteres</div>
+        <div *ngIf="reactiveTaskForm.get('title').errors.maxlength">Deve ter no máximo 255 caracteres</div>
+      </div>
     </div>
 
-    <div class="form-group col-md-3">
+    <div class="form-group col-md-3 has-feedback" [class.has-error]="reactiveTaskForm.get('deadline').invalid && reactiveTaskForm.get('deadline').touched" [class.has-success]="reactiveTaskForm.get('deadline').valid" >
       <label for="deadline" class="control-label">Deadline</label>
       <input class="form-control" id="deadline" type="text" formControlName="deadline" >
+      <span class="glyphicon form-control-feedback" [class.glyphicon-ok]="reactiveTaskForm.get('deadline').valid" [class.glyphicon-remove]="reactiveTaskForm.get('deadline').invalid && reactiveTaskForm.get('deadline').touched" style="margin-right: 20px;"></span>
+    
+      <div *ngIf="reactiveTaskForm.get('deadline').invalid && reactiveTaskForm.get('deadline').touched" class="text-danger" >
+        <div *ngIf="reactiveTaskForm.get('deadline').errors.required">Deadline is required</div>
+      </div>
     </div>
 
-    <div class="form-group col-md-3">
-      <label for="done" class="control-label">Title</label>
+    <div class="form-group col-md-3 has-feedback" [class.has-error]="reactiveTaskForm.get('done').invalid && reactiveTaskForm.get('done').touched" [class.has-success]="reactiveTaskForm.get('done').valid" >
+      <label for="done" class="control-label">Done</label>
       <select class="form-control" id="done" type="text" formControlName="done" >
         <option *ngFor="let option of taskDoneOptions" [value]="option.value">{{ option.text }}</option>
       </select>
+      <span class="glyphicon form-control-feedback" [class.glyphicon-ok]="reactiveTaskForm.get('done').valid" [class.glyphicon-remove]="reactiveTaskForm.get('done').invalid && reactiveTaskForm.get('done').touched" style="margin-right: 25px;"></span>
+      
+      <div *ngIf="reactiveTaskForm.get('done').invalid && reactiveTaskForm.get('done').touched" class="text-danger" >
+        <div *ngIf="reactiveTaskForm.get('done').errors.required">Done is required</div>
+      </div>
     </div>    
   </div>
 
@@ -28,21 +45,9 @@
     </div>
   </div>
 
-
-  <div class="row" formGroupName="user">
-    <div class="form-group col-md-6">
-      <label for="name" class="control-label">Nome do usuário</label>
-      <input class="form-control" id="name" type="text" formControlName="name" >
-    </div>
-
-    <div class="form-group col-md-6">
-      <label for="email" class="control-label">Email do usuário</label>
-      <input class="form-control" id="email" type="email" formControlName="email" >
-    </div>
-  </div>
-
   <pre>
     {{ reactiveTaskForm.value | json }}
+    {{ reactiveTaskForm.get('title').errors | json }}
   </pre>
 </form>
 
